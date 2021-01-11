@@ -1,0 +1,17 @@
+Minimal set of files required to produce a working Chromium Embedded Framework
+(CEF) based program.
+
+CEF is an open source library for embedding a Chromium browser
+https://bitbucket.org/chromiumembedded/cef/
+
+Contents:
+
+- Example "cefsimple" source code from CEF
+- Makefile (Linux x86-64 only)
+
+Requires a binary CEF disribution that can be downloaded from here:
+https://cef-builds.spotifycdn.com/index.html
+
+Branch 'master' contains the original cefsimple program
+Branch 'minimal' contains a stripped down version of cefsimple
+
