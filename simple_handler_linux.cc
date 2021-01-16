@@ -2,12 +2,12 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
+// Copyright (c) 2021 lucianoiam
+
 #include "simple_handler.h"
 
-#if defined(CEF_X11)
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
-#endif
 
 #include <string>
 
@@ -18,7 +18,6 @@ void SimpleHandler::PlatformTitleChange(CefRefPtr<CefBrowser> browser,
                                         const CefString& title) {
   std::string titleStr(title);
 
-#if defined(CEF_X11)
   // Retrieve the X11 display shared with Chromium.
   ::Display* display = cef_get_xdisplay();
   DCHECK(display);
@@ -46,5 +45,4 @@ void SimpleHandler::PlatformTitleChange(CefRefPtr<CefBrowser> browser,
   // is Compound Text. This shouldn't matter 90% of the time since this is the
   // fallback to the UTF8 property above.
   XStoreName(display, browser->GetHost()->GetWindowHandle(), titleStr.c_str());
-#endif  // defined(CEF_X11)
 }
