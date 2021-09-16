@@ -17,14 +17,12 @@ CEF_BIN_LINKED = $(FILES_CEF_BIN:%=$(CEF_TARGET_DIR)/%)
 link_cef_bin: $(CEF_BIN_LINKED)
 
 $(CEF_TARGET_DIR)/%: $(CEF_BIN_PATH)/%
-	ln -s $< $@
+	ln -sf $< $@
 
 FILES_CEF_RES = \
-	cef.pak \
-	cef_100_percent.pak \
-	cef_200_percent.pak \
-	cef_extensions.pak \
-	devtools_resources.pak \
+	resources.pak \
+	chrome_100_percent.pak \
+	chrome_200_percent.pak \
 	icudtl.dat \
 	locales
 
@@ -33,7 +31,7 @@ CEF_RES_LINKED = $(FILES_CEF_RES:%=$(CEF_TARGET_DIR)/%)
 link_cef_res: $(CEF_RES_LINKED)
 
 $(CEF_TARGET_DIR)/%: $(CEF_RES_PATH)/%
-	ln -s $< $@
+	ln -sf $< $@
 
 # CEF wrapper static library
 # Binary distribution comes with a CMakeLists.txt file for building this target
@@ -47,6 +45,7 @@ libcef_dll_wrapper: LDFLAGS = $(CEF_LDFLAGS)
 libcef_dll_wrapper: $(CEF_BUILD_DIR)/libcef_dll_wrapper.a
 
 FILES_CEF_WRAPPER = \
+	cpptoc/frame_handler_cpptoc.cc \
 	cpptoc/v8interceptor_cpptoc.cc \
 	cpptoc/scheme_handler_factory_cpptoc.cc \
 	cpptoc/drag_handler_cpptoc.cc \
@@ -60,7 +59,6 @@ FILES_CEF_WRAPPER = \
 	cpptoc/browser_process_handler_cpptoc.cc \
 	cpptoc/v8accessor_cpptoc.cc \
 	cpptoc/response_filter_cpptoc.cc \
-	cpptoc/register_cdm_callback_cpptoc.cc \
 	cpptoc/resource_bundle_handler_cpptoc.cc \
 	cpptoc/media_observer_cpptoc.cc \
 	cpptoc/load_handler_cpptoc.cc \
@@ -217,11 +215,8 @@ FILES_CEF_WRAPPER = \
 	base/cef_lock_impl.cc \
 	base/cef_callback_internal.cc \
 	base/cef_thread_checker_impl.cc \
-	base/cef_string16.cc \
 	base/cef_lock.cc \
 	base/cef_logging.cc \
-	base/cef_bind_helpers.cc \
-	base/cef_atomicops_x86_gcc.cc \
 	base/cef_weak_ptr.cc \
 	base/cef_callback_helpers.cc \
 	shutdown_checker.cc \
